@@ -1,10 +1,8 @@
 'use client';
 
 import React from 'react';
-import MathRendererClient from './MathRendererClient';
+import MathRenderer from './MathRenderer';
 import { useTranslations } from 'next-intl';
-
-const MathRenderer = MathRendererClient;
 
 interface WorkedExampleProps {
     problemTex: string;

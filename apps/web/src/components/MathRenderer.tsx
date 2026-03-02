@@ -1,46 +1,62 @@
-import React from 'react';
-import { mathjax } from 'mathjax-full/js/mathjax.js';
-import { TeX } from 'mathjax-full/js/input/tex.js';
-import { SVG } from 'mathjax-full/js/output/svg.js';
-import { liteAdaptor } from 'mathjax-full/js/adaptors/liteAdaptor.js';
-import { RegisterHTMLHandler } from 'mathjax-full/js/handlers/html.js';
-import { AllPackages } from 'mathjax-full/js/input/tex/AllPackages.js';
+'use client';
 
-// Initialize the MathJax HTML document with light adaptor
-const adaptor = liteAdaptor();
-RegisterHTMLHandler(adaptor);
+import React, { useEffect, useRef } from 'react';
 
-const texInput = new TeX({ packages: AllPackages });
-const svgOutput = new SVG({ fontCache: 'local' });
-const html = mathjax.document('', { InputJax: texInput, OutputJax: svgOutput });
-
-/**
- * Pre-renders LaTeX to SVG on the server side to avoid client layout shifts and offline rendering failures.
- */
-function renderLatexToSVG(latex: string, display: boolean = true): string {
-    try {
-        const node = html.convert(latex, { display });
-        return adaptor.innerHTML(node);
-    } catch (e) {
-        console.error("MathJax Render Error:", e);
-        return `<span style="color:red">Error rendering formula</span>`;
-    }
-}
-
-interface MathRendererProps {
+interface MathRendererClientProps {
     latex: string;
     display?: boolean;
     className?: string;
 }
 
-export default function MathRenderer({ latex, display = true, className = "" }: MathRendererProps) {
-    const svgCode = renderLatexToSVG(latex, display);
+/**
+ * Client-side LaTeX renderer using KaTeX loaded from CDN.
+ * Used inside client components like WorkedExample and ActiveRecallTest.
+ */
+export default function MathRendererClient({ latex, display = true, className = '' }: MathRendererClientProps) {
+    const ref = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const render = () => {
+            if (!ref.current) return;
+            try {
+                // @ts-ignore
+                if (window.katex) {
+                    // @ts-ignore
+                    window.katex.render(latex, ref.current, {
+                        displayMode: display,
+                        throwOnError: false,
+                    });
+                }
+            } catch (e) {
+                if (ref.current) {
+                    ref.current.innerHTML = `<span style="color:red">Error: ${latex}</span>`;
+                }
+            }
+        };
+
+        // Load KaTeX if not already loaded
+        if (!(window as any).katex) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css';
+            document.head.appendChild(link);
+
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+            script.onload = render;
+            document.head.appendChild(script);
+        } else {
+            render();
+        }
+    }, [latex, display]);
 
     return (
         <div
-            className={`math-rendered-container ${display ? 'block text-center my-4' : 'inline-block px-1'} ${className}`}
-            dangerouslySetInnerHTML={{ __html: svgCode }}
+            ref={ref}
+            className={`math-rendered-client ${display ? 'block text-center my-4' : 'inline-block px-1'} ${className}`}
             style={{ overflowX: 'auto', overflowY: 'hidden' }}
-        />
+        >
+            <span className="text-gray-400 italic text-sm">{latex}</span>
+        </div>
     );
 }
