@@ -1,0 +1,14 @@
+{
+    "home": {
+        "title": "MathPath v2 Core Initialization"
+    },
+    "institution": {
+        "dashboardTitle": "Institutional Dashboard",
+        "dashboardDesc": "Manage cohorts, import student rosters, and monitor enterprise license usage.",
+        "bulkImportTitle": "Bulk CSV Student Import"
+    },
+    "admin": {
+        "cmsTab": "Content CMS",
+        "modTab": "Moderation Tools"
+    }
+}

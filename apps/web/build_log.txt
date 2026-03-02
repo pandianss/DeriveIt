@@ -1,0 +1,59 @@
+
+> web@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.3
+
+   Creating an optimized production build ...
+> [PWA] Compile server
+> [PWA] Compile server
+> [PWA] Compile client (static)
+> [PWA] Auto register service worker with: E:\projects\DeriveIt\node_modules\next-pwa\register.js
+> [PWA] Service worker: E:\projects\DeriveIt\apps\web\public\sw.js
+> [PWA]   url: /sw.js
+> [PWA]   scope: /
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+Error: Cannot find module 'E:\projects\DeriveIt\apps\web\.next\server\package.json'
+Require stack:
+- E:\projects\DeriveIt\apps\web\.next\server\app\[locale]\page.js
+- E:\projects\DeriveIt\node_modules\next\dist\server\require.js
+- E:\projects\DeriveIt\node_modules\next\dist\server\load-components.js
+- E:\projects\DeriveIt\node_modules\next\dist\build\utils.js
+- E:\projects\DeriveIt\node_modules\next\dist\build\worker.js
+- E:\projects\DeriveIt\node_modules\next\dist\compiled\jest-worker\processChild.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1420:15)
+    at E:\projects\DeriveIt\node_modules\next\dist\server\require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1058:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1063:22)
+    at Module._load (node:internal/modules/cjs/loader:1226:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (E:\projects\DeriveIt\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'E:\\projects\\DeriveIt\\apps\\web\\.next\\server\\app\\[locale]\\page.js',
+    'E:\\projects\\DeriveIt\\node_modules\\next\\dist\\server\\require.js',
+    'E:\\projects\\DeriveIt\\node_modules\\next\\dist\\server\\load-components.js',
+    'E:\\projects\\DeriveIt\\node_modules\\next\\dist\\build\\utils.js',
+    'E:\\projects\\DeriveIt\\node_modules\\next\\dist\\build\\worker.js',
+    'E:\\projects\\DeriveIt\\node_modules\\next\\dist\\compiled\\jest-worker\\processChild.js'
+  ]
+}
+
+> Build error occurred
+Error: Failed to collect page data for /[locale]
+    at E:\projects\DeriveIt\node_modules\next\dist\build\utils.js:1268:15
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {
+  type: 'Error'
+}
+npm error Lifecycle script `build` failed with error:
+npm error code 1
+npm error path E:\projects\DeriveIt\apps\web
+npm error workspace web@0.1.0
+npm error location E:\projects\DeriveIt\apps\web
+npm error command failed
+npm error command C:\Windows\system32\cmd.exe /d /s /c next build

@@ -1,0 +1,27 @@
+config:
+  target: "http://localhost:4000"
+  phases:
+    - duration: 60
+      arrivalRate: 50
+      name: "Warm up"
+    - duration: 120
+      arrivalRate: 100
+      rampTo: 500
+      name: "Ramp up to peak load"
+    - duration: 300
+      arrivalRate: 500
+      name: "Sustained peak load"
+  engines:
+    socketio-v3: {}
+scenarios:
+  - name: "Simulate learner submitting scores"
+    engine: "socketio-v3"
+    flow:
+      - emit:
+          channel: "scoreSubmitted"
+          data:
+            userId: "user_{{ $randomString() }}"
+            displayName: "Test Learner {{ $randomNumber(100) }}"
+            points: 10
+            streak: 5
+      - think: 5 # Wait 5 seconds to simulate staying on page
