@@ -1,14 +1,27 @@
 {
-    "home": {
-        "title": "MathPath v2 Core Initialization"
-    },
+    "home": { "title": "MathPath v2 Core Initialization" },
     "institution": {
         "dashboardTitle": "Institutional Dashboard",
         "dashboardDesc": "Manage cohorts, import student rosters, and monitor enterprise license usage.",
         "bulkImportTitle": "Bulk CSV Student Import"
     },
-    "admin": {
-        "cmsTab": "Content CMS",
-        "modTab": "Moderation Tools"
+    "admin": { "cmsTab": "Content CMS", "modTab": "Moderation Tools" },
+    "activeRecall": {
+        "sessionComplete": "Assessment Complete",
+        "scoreReport": "You scored {score} out of {total}",
+        "correct": "Correct!",
+        "incorrect": "Not yet. Review the structure and try again.",
+        "questionProgress": "Question {current} of {total}",
+        "inputLabel": "Construct the LaTeX formula from memory:",
+        "requestHint": "Need a hint?",
+        "submit": "Submit"
+    },
+    "workedExample": {
+        "title": "Worked Example",
+        "partial": "(Partial)",
+        "problemLabel": "Problem:",
+        "stepsLabel": "Steps:",
+        "solutionLabel": "Final Solution:",
+        "completeTheRest": "... You complete the rest."
     }
 }

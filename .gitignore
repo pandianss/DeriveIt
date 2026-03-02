@@ -49,3 +49,6 @@ env/
 *.key
 *.mobileprovision
 *.orig.*
+
+# Temp Source
+DeriveIt-fixed/
